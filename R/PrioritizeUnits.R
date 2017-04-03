@@ -9,12 +9,12 @@
 #'
 #' @examples
 #' \dontrun{
-#'
+#' ErrorMoments <- readRDS('../ErrorMoments.rds')
 #' UnitPriorParam <- new(Class = 'UnitPrioritizationParam',
 #'                       UnitScFunction = 'MinkUnitSc',
 #'                       ScFunctionParam =  list(alpha = 1, Weights = 1))
 #'
-#' PrioritizeUnits(ErrorMoment, UnitPriorParam)
+#' PrioritizeUnits(ErrorMoments, UnitPriorParam)
 #'
 #' }
 setGeneric("PrioritizeUnits", function(object, Param) {standardGeneric("PrioritizeUnits")})
