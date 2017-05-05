@@ -12,24 +12,26 @@
 #'
 #' @param Moments Object of class \linkS4class{ErrorMoments}.
 #'
+#' @param DD Object of class DD.
+#'
 #' @return Returns a \linkS4class{data.table} with the complementary info.
 #'
 #' @examples
 #'
 #' @import data.table contObsPredModelParam SelEditErrorMoment
 #'
-#' @importFrom StQ ExtractNames
+#' @importFrom StQ ExtractNames melt_StQ
 #'
 #' @export
-setGeneric("getPriorityInfo", function(object, ObsPredModelParam, Moments){standardGeneric("getPriorityInfo")})
+setGeneric("getPriorityInfo", function(object, ObsPredModelParam, Moments, DD){standardGeneric("getPriorityInfo")})
 
 #' @rdname getPriorityInfo
 #'
 #' @export
 setMethod(
     f = "getPriorityInfo",
-    signature = c("UnitPrioritization", "contObsPredModelParam", "ErrorMoments"),
-    function(object, ObsPredModelParam, Moments) {
+    signature = c("UnitPrioritization", "contObsPredModelParam", "ErrorMoments", "DD"),
+    function(object, ObsPredModelParam, Moments, DD) {
 
         VarNames <- Moments@VarNames
         DomainNames <- names(Moments@Domains)
@@ -82,22 +84,23 @@ setMethod(
             ObsPredData.StQ <- ObsPredModelParam@Data#[IDDD == localVarName]
             ObsPredData.dt <- ObsPredData.dt[, c(IDQual, localVarNames), with = F]
             localOutput <- merge(localOutput, ObsPredData.dt, all.x = TRUE, by = IDQual)
-            localOutput[[paste0('PredError', VarName)]] <- localOutput[[VarName]] - localOutput[[paste0('Pred', VarName)]]
+            localOutput[, (paste0('PredError', VarName)) := get(VarName) - get(paste0('Pred', VarName))]
             localOutput[, (paste0('Pred', VarName)) := NULL]
             localOutput[, (VarName) := NULL]
             localOutput[, (paste0('DesignW', VarName)) := NULL]
-            localOutput$IDEdit <- localVarName
-            setcolorder(localOutput, c(IDQual, 'DesignWQuantile', 'UnitScoreQuantile', 'IDEdit', paste0('PredError', VarName), paste0('PredErrorSTD', VarName), paste0('MomentQuant', VarName)))
+            setcolorder(localOutput, c(IDQual, 'DesignWQuantile', 'UnitScoreQuantile', paste0('PredError', VarName), paste0('PredErrorSTD', VarName), paste0('MomentQuant', VarName)))
+            setnames(localOutput, 'DesignWQuantile', 'Parametro_07._5.1.1.5.')
             setnames(localOutput, 'UnitScoreQuantile', 'Parametro_07._5.1.1.6.')
-            setnames(localOutput, paste0('PredError', VarName), 'Parametro_07._5.1.1.7.')
-            setnames(localOutput, paste0('PredErrorSTD', VarName), 'Parametro_07._5.1.1.8.')
-            setnames(localOutput, paste0('MomentQuant', VarName), 'Parametro_07._5.1.1.9.')
-            setnames(localOutput, 'DesignWQuantile', 'Parametro_07._5.1.1.5')
+            setnames(localOutput, paste0('PredError', VarName), paste0('Parametro_07._5.1.1.7._', localVarName))
+            setnames(localOutput, paste0('PredErrorSTD', VarName), paste0('Parametro_07._5.1.1.8._', localVarName))
+            setnames(localOutput, paste0('MomentQuant', VarName), paste0('Parametro_07._5.1.1.9._', localVarName))
             output[[VarName]] <- localOutput
 
         }
 
-        output <- rbindlist(output)
+        output <- Reduce(function(x, y){merge(x, y, all = TRUE, by = intersect(names(x), names(y)))},
+                         output)
+        output <- melt_StQ(output, DD)
         return(output)
 
 
