@@ -1,4 +1,6 @@
-#' Sets the complementary info about the prioritization of units.
+#' @title Set complementary info about the prioritization of units.
+#'
+#' @description This setter sets the slot PriorityInfo in a \linkS4class{UnitPrioritization} object.
 #'
 #' @param object Object of class \linkS4class{UnitPrioritization}.
 #'
@@ -6,6 +8,7 @@
 #'
 #' @return Object of class \linkS4class{UnitPrioritization}.
 #'
+#' @rdname setPriorityInfo
 #'
 #' @examples
 #' \dontrun{
@@ -17,7 +20,7 @@
 #' PrioritizeUnits(ErrorMoment, UnitPriorParam)
 #'
 #' }
-setGeneric("setPriorityInfo<-", function(object, Param) {standardGeneric("setPriorityInfo<-")})
+setGeneric("setPriorityInfo<-", function(object, value) {standardGeneric("setPriorityInfo<-")})
 
 #' @rdname setPriorityInfo
 #'
@@ -29,9 +32,10 @@ setGeneric("setPriorityInfo<-", function(object, Param) {standardGeneric("setPri
 setReplaceMethod(
     f = "setPriorityInfo",
     signature = c("UnitPrioritization", "data.table"),
-    function(object, Param){
+    function(object, value){
 
-
+        object@PriorityInfo <- value
+        return(object)
 
     }
 )

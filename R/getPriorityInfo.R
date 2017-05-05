@@ -53,31 +53,27 @@ setMethod(
             })
 
             ObsPredData.StQ <- ObsPredModelParam@Data#[IDDD == localVarName]
-            ObsPredData.StQ$Data[, NewVar := 1]
-return(ObsPredData.StQ@Data)
 
             ObsPredData.dt <- dcast_StQ(ObsPredData.StQ)
             Units.list <- copy(Moments@Units)
             Units <- rbindlist(Units.list)
             DesignW.dt <- ObsPredData.dt[, c(IDQual, DomainNames, paste0('DesignW', VarName)), with = FALSE]
-            #DesignWQuants <- DesignW.dt[, DesignWQuants := 1]
-return(DesignW.dt[, DesignWQuants := 1])
-            DesignW.dt <- merge(DesignW.dt, Units, all.y = TRUE, by = names(Units))
-print(class(DesignW.dt))
-            #DesignWQuants <- DesignW.dt[, DesignWQuants := function(DesW){ecdf(DesW)(DesW)}(get(paste0('DesignW', VarName))), by = DomainNames]
-            DesignWQuants <- DesignW.dt[, DesignWQuants := 1]
-return(DesignWQuants)
+            setkeyv(DesignW.dt, names(Units))
+            DesignW.dt <- DesignW.dt[Units]
+            ECDF <- function(x){ecdf(x)(x)}
+            DesignWQuants <- DesignW.dt[, DesignWQuantile := ECDF(get(paste0('DesignW', VarName))), by = DomainNames]
+
             localOutput <- lapply(seq(along = Units.list), function(index){
 
                 localDT <- Units.list[[index]]
                 setkeyv(localDT, names(localDT))
                 localDT$MomentQuantile <- MomentQuants[[index]]
                 UnitScore <- object@UnitScores[[index]]
-                localDT$UnitScoreQuantile <- ecdf(UnitScore)(UnitScore)
-
+                localDT[, UnitScoreQuantile := ecdf(UnitScore)(UnitScore)]
                 return(localDT)
             })
             localOutput <- rbindlist(localOutput)
+            localOutput[, DesignWQuantile := DesignWQuants[['DesignWQuantile']]]
             setnames(localOutput, 'MomentQuantile', paste0('MomentQuant', VarName))
 
             localVarName <- ExtractNames(VarName)
@@ -87,15 +83,16 @@ return(DesignWQuants)
             ObsPredData.dt <- ObsPredData.dt[, c(IDQual, localVarNames), with = F]
             localOutput <- merge(localOutput, ObsPredData.dt, all.x = TRUE, by = IDQual)
             localOutput[[paste0('PredError', VarName)]] <- localOutput[[VarName]] - localOutput[[paste0('Pred', VarName)]]
-            localOutput[[paste0('Pred', VarName)]] <- NULL
-            localOutput[[VarName]] <- NULL
+            localOutput[, (paste0('Pred', VarName)) := NULL]
+            localOutput[, (VarName) := NULL]
+            localOutput[, (paste0('DesignW', VarName)) := NULL]
             localOutput$IDEdit <- localVarName
-            setcolorder(localOutput, c(IDQual, 'UnitScoreQuantile', 'IDEdit', paste0('PredError', VarName), paste0('PredErrorSTD', VarName), paste0('MomentQuant', VarName), paste0('DesignW', VarName)))
+            setcolorder(localOutput, c(IDQual, 'DesignWQuantile', 'UnitScoreQuantile', 'IDEdit', paste0('PredError', VarName), paste0('PredErrorSTD', VarName), paste0('MomentQuant', VarName)))
             setnames(localOutput, 'UnitScoreQuantile', 'Parametro_07._5.1.1.6.')
             setnames(localOutput, paste0('PredError', VarName), 'Parametro_07._5.1.1.7.')
             setnames(localOutput, paste0('PredErrorSTD', VarName), 'Parametro_07._5.1.1.8.')
             setnames(localOutput, paste0('MomentQuant', VarName), 'Parametro_07._5.1.1.9.')
-            setnames(localOutput, paste0('DesignW', VarName), 'Parametro_07._5.2.2.')
+            setnames(localOutput, 'DesignWQuantile', 'Parametro_07._5.1.1.5')
             output[[VarName]] <- localOutput
 
         }
@@ -106,4 +103,3 @@ return(DesignWQuants)
 
     }
 )
-
