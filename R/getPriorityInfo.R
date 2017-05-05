@@ -88,11 +88,11 @@ setMethod(
             localOutput[, (paste0('DesignW', VarName)) := NULL]
             localOutput$IDEdit <- localVarName
             setcolorder(localOutput, c(IDQual, 'DesignWQuantile', 'UnitScoreQuantile', 'IDEdit', paste0('PredError', VarName), paste0('PredErrorSTD', VarName), paste0('MomentQuant', VarName)))
-            setnames(localOutput, 'UnitScoreQuantile', 'Parametro_07._5.1.1.6.')
-            setnames(localOutput, paste0('PredError', VarName), 'Parametro_07._5.1.1.7.')
-            setnames(localOutput, paste0('PredErrorSTD', VarName), 'Parametro_07._5.1.1.8.')
-            setnames(localOutput, paste0('MomentQuant', VarName), 'Parametro_07._5.1.1.9.')
             setnames(localOutput, 'DesignWQuantile', 'Parametro_07._5.1.1.5')
+            setnames(localOutput, 'UnitScoreQuantile', 'Parametro_07._5.1.1.6._')
+            setnames(localOutput, paste0('PredError', VarName), paste0('Parametro_07._5.1.1.7.', localVarName))
+            setnames(localOutput, paste0('PredErrorSTD', VarName), paste0('Parametro_07._5.1.1.8.', localVarName))
+            setnames(localOutput, paste0('MomentQuant', VarName), paste0('Parametro_07._5.1.1.9.', localVarName))
             output[[VarName]] <- localOutput
 
         }
