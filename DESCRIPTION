@@ -7,13 +7,14 @@ Authors@R: c(
     person("Elisa", "Esteban", email = "elisa.esteban.segurado@gmail.com", role = "aut"),
     person("Soledad", "Saldaña", email = "soledad.saldana.diaz@gmail.com", role = "aut"))
 Maintainer: David Salgado <david.salgado.fernandez@gmail.com>
-Description: Definition of an S4 class and methods to handle and compute the prioritization of units under the optimization approach to selective editing
+Description: Definition of an S4 class and methods to handle and compute the
+    prioritization of units under the optimization approach to selective editing
 Depends:
     R (>= 3.3.0)
 Imports:
     methods (>= 3.3.0),
-    data.table (>= 1.10.0),
     StQ (>= 0.3.3),
+    data.table (>= 1.10.0),
     RepoTime (>= 0.1.0),
     StQImputation (>= 0.0.1),
     StQPrediction (>= 0.0.1),
@@ -22,8 +23,10 @@ Imports:
 License: file LICENSE
 Encoding: UTF-8
 LazyData: true
-Collate: 
+Collate:
     'UnitPrioritization-class.R'
     'UnitPrioritizationParam-class.R'
     'PrioritizeUnits.R'
+    'getPriorityInfo.R'
+    'setPriorityInfo.R'
 RoxygenNote: 6.0.1

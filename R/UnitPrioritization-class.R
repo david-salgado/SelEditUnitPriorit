@@ -30,7 +30,7 @@ setClass(Class = "UnitPrioritization",
                    Units = 'list',
                    UnitScores = 'list',
                    UnitPriority = 'list',
-                   PriorityInfo = 'list'),
+                   PriorityInfo = 'data.table'),
          validity = function(object){
 
 
