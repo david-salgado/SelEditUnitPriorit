@@ -12,24 +12,26 @@
 #'
 #' @param Moments Object of class \linkS4class{ErrorMoments}.
 #'
+#' @param DD Object of class DD.
+#'
 #' @return Returns a \linkS4class{data.table} with the complementary info.
 #'
 #' @examples
 #'
 #' @import data.table contObsPredModelParam SelEditErrorMoment
 #'
-#' @importFrom StQ ExtractNames
+#' @importFrom StQ ExtractNames melt_StQ
 #'
 #' @export
-setGeneric("getPriorityInfo", function(object, ObsPredModelParam, Moments){standardGeneric("getPriorityInfo")})
+setGeneric("getPriorityInfo", function(object, ObsPredModelParam, Moments, DD){standardGeneric("getPriorityInfo")})
 
 #' @rdname getPriorityInfo
 #'
 #' @export
 setMethod(
     f = "getPriorityInfo",
-    signature = c("UnitPrioritization", "contObsPredModelParam", "ErrorMoments"),
-    function(object, ObsPredModelParam, Moments) {
+    signature = c("UnitPrioritization", "contObsPredModelParam", "ErrorMoments", "DD"),
+    function(object, ObsPredModelParam, Moments, DD) {
 
         VarNames <- Moments@VarNames
         DomainNames <- names(Moments@Domains)
@@ -82,7 +84,7 @@ setMethod(
             ObsPredData.StQ <- ObsPredModelParam@Data#[IDDD == localVarName]
             ObsPredData.dt <- ObsPredData.dt[, c(IDQual, localVarNames), with = F]
             localOutput <- merge(localOutput, ObsPredData.dt, all.x = TRUE, by = IDQual)
-            localOutput[[paste0('PredError', VarName)]] <- localOutput[[VarName]] - localOutput[[paste0('Pred', VarName)]]
+            localOutput[, (paste0('PredError', VarName)) := get(VarName) - get(paste0('Pred', VarName))]
             localOutput[, (paste0('Pred', VarName)) := NULL]
             localOutput[, (VarName) := NULL]
             localOutput[, (paste0('DesignW', VarName)) := NULL]
@@ -97,7 +99,9 @@ setMethod(
 
         }
 
-        output <- rbindlist(output)
+        output <- Reduce(function(x, y){merge(x, y, all = TRUE, by = intersect(names(x), names(y)))},
+                         output)
+        output <- melt_StQ(output, DD)
         return(output)
 
 

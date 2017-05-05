@@ -28,10 +28,12 @@ setGeneric("setPriorityInfo<-", function(object, value) {standardGeneric("setPri
 #'
 #' @import data.table
 #'
+#' @importClassesFrom StQ
+#'
 #' @export
 setReplaceMethod(
     f = "setPriorityInfo",
-    signature = c("UnitPrioritization", "data.table"),
+    signature = c("UnitPrioritization", "StQ"),
     function(object, value){
 
         object@PriorityInfo <- value
