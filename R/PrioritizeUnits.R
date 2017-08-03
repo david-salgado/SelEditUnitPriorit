@@ -25,8 +25,6 @@ setGeneric("PrioritizeUnits", function(object, Param) {standardGeneric("Prioriti
 #'
 #' @import SelEditErrorMoment SelEditFunctions
 #'
-#' @importClassesFrom StQ
-#'
 #' @export
 setMethod(f = "PrioritizeUnits",
           signature = c("ErrorMoments", "UnitPrioritizationParam"),
