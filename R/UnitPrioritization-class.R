@@ -18,9 +18,7 @@
 #' new(Class = 'UnitPrioritization')
 #'
 #' \dontrun{
-#' UnitPriorParam <- new(Class = 'UnitPrioritization',
-#'                       UnitScFunction = 'SelEditFunctions::MinkUnitSc',
-#'                       ScFunctionParam =  list(alpha = 1, Weights = 1))
+#' UnitPriorParam <- new(Class = 'UnitPrioritization')
 #'
 #' }
 #'
@@ -31,6 +29,11 @@ setClass(Class = "UnitPrioritization",
                    UnitScores = 'list',
                    UnitPriority = 'list',
                    PriorityInfo = 'StQ'),
+         prototype = list(Domains = data.table(),
+                          Units = list(),
+                          UnitScores = list(),
+                          UnitPriority = list(),
+                          PriorityInfo = StQ::StQ()),
          validity = function(object){
 
 

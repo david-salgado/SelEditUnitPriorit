@@ -21,7 +21,7 @@ setGeneric("PrioritizeUnits", function(object, Param) {standardGeneric("Prioriti
 
 #' @rdname PrioritizeUnits
 #'
-#' @include UnitPrioritizationParam-class.R UnitPrioritization-class.R
+#' @include UnitPrioritizationParam-class.R UnitPrioritization-class.R StQ-class.R
 #'
 #' @import SelEditErrorMoment SelEditFunctions
 #'
@@ -55,7 +55,8 @@ setMethod(f = "PrioritizeUnits",
                             Domains = object@Domains,
                             Units = object@Units,
                             UnitScores = UnitScores,
-                            UnitPriority = UnitPriority)
+                            UnitPriority = UnitPriority,
+                            PriorityInfo = StQ::StQ())
 
               return(output)
 
