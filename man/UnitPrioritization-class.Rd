@@ -27,9 +27,7 @@ prioritization in the optimization approach to selective editing.
 new(Class = 'UnitPrioritization')
 
 \dontrun{
-UnitPriorParam <- new(Class = 'UnitPrioritization',
-                      UnitScFunction = 'SelEditFunctions::MinkUnitSc',
-                      ScFunctionParam =  list(alpha = 1, Weights = 1))
+UnitPriorParam <- new(Class = 'UnitPrioritization')
 
 }
 

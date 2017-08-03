@@ -21,9 +21,11 @@ setGeneric("PrioritizeUnits", function(object, Param) {standardGeneric("Prioriti
 
 #' @rdname PrioritizeUnits
 #'
-#' @include UnitPrioritizationParam-class.R UnitPrioritization-class.R StQ-class.R
+#' @include UnitPrioritizationParam-class.R UnitPrioritization-class.R
 #'
 #' @import SelEditErrorMoment SelEditFunctions
+#'
+#' @importClassesFrom StQ
 #'
 #' @export
 setMethod(f = "PrioritizeUnits",

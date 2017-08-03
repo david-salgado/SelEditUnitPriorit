@@ -3,12 +3,12 @@
 \docType{methods}
 \name{setPriorityInfo<-}
 \alias{setPriorityInfo<-}
-\alias{setPriorityInfo<-,UnitPrioritization,data.table-method}
+\alias{setPriorityInfo<-,UnitPrioritization,StQ-method}
 \title{Set complementary info about the prioritization of units.}
 \usage{
 setPriorityInfo(object) <- value
 
-\S4method{setPriorityInfo}{UnitPrioritization,data.table}(object) <- value
+\S4method{setPriorityInfo}{UnitPrioritization,StQ}(object) <- value
 }
 \arguments{
 \item{object}{Object of class \linkS4class{UnitPrioritization}.}
