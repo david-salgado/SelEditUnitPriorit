@@ -23,10 +23,10 @@ Imports:
 License: file LICENSE
 Encoding: UTF-8
 LazyData: true
-Collate:
+Collate: 
     'UnitPrioritization-class.R'
+    'ComputePriorityInfo.R'
     'UnitPrioritizationParam-class.R'
     'PrioritizeUnits.R'
-    'getPriorityInfo.R'
     'setPriorityInfo.R'
 RoxygenNote: 6.0.1

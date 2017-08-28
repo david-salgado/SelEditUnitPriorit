@@ -25,6 +25,8 @@ setGeneric("PrioritizeUnits", function(object, Param) {standardGeneric("Prioriti
 #'
 #' @import SelEditErrorMoment SelEditFunctions
 #'
+#' @importFrom StQ StQ
+#'
 #' @export
 setMethod(f = "PrioritizeUnits",
           signature = c("ErrorMoments", "UnitPrioritizationParam"),
@@ -49,13 +51,14 @@ setMethod(f = "PrioritizeUnits",
 
               })
 
-              UnitPriority <- lapply(UnitScores, order, decreasing = TRUE)
+              UnitPriority <- lapply(UnitScores, function(x){rank(-x, ties.method = 'random')})
 
               output <- new(Class = 'UnitPrioritization',
                             Domains = object@Domains,
                             Units = object@Units,
                             UnitScores = UnitScores,
-                            UnitPriority = UnitPriority)
+                            UnitPriority = UnitPriority,
+                            PriorityInfo = StQ())
 
               return(output)
 

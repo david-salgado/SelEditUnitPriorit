@@ -26,9 +26,7 @@ setGeneric("setPriorityInfo<-", function(object, value) {standardGeneric("setPri
 #'
 #' @include UnitPrioritization-class.R
 #'
-#' @import data.table
-#'
-#' @importClassesFrom StQ
+#' @import data.table StQ
 #'
 #' @export
 setReplaceMethod(
