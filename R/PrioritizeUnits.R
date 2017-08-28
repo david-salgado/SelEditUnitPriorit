@@ -58,7 +58,7 @@ setMethod(f = "PrioritizeUnits",
                             Units = object@Units,
                             UnitScores = UnitScores,
                             UnitPriority = UnitPriority,
-                            PriorityInfo = StQ())
+                            PriorityInfo = StQ::StQ())
 
               return(output)
 
