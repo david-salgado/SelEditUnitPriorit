@@ -50,10 +50,10 @@ setMethod(f = "PrioritizeUnits",
               })
 
               UnitPriority <- lapply(UnitScores, function(score){
-
-                  dt.aux <- data.table(init.order = seq(along = length(score)), scores = score)
+                  
+                  dt.aux <- data.table(init.order = seq(along = score), scores = score)
                   setkeyv(dt.aux, 'scores')
-                  dt.aux[, priority := rev(seq(along = length(score)))]
+                  dt.aux[, priority := rev(seq(along = score))]
                   setkey(dt.aux, 'init.order')
                   out <- dt.aux[['priority']]
                   return(out)
