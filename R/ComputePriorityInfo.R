@@ -78,10 +78,11 @@ setMethod(
             })
             localOutput <- rbindlist(localOutput)
             localOutput <- merge(localOutput, DesignWQuants, by = IDQual, all.x = TRUE)
+            localOutput[, (DomainNames) := NULL]
             setnames(localOutput, 'MomentQuantile', paste0('MomentQuant', VarName))
             #localOutput[, (paste0('DesignW', VarName)) := NULL]
 
-            localVarName <- ExtractNames(VarName)
+            # localVarName <- ExtractNames(VarName)
             #ObsPredVarNames <- paste0(c('Pred', 'PredErrorSTD', 'DesignW'), VarName)
             ObsPredVarNames <- paste0(c('Pred', 'ObsErrorSTD', 'PredErrorSTD', 'DesignW'), VarName)
             localVarNames <- c(VarName, ObsPredVarNames)
@@ -91,7 +92,7 @@ setMethod(
             localOutput <- merge(localOutput, ObsPredData.dt, all.x = TRUE, by = IDQual)
             #localOutput[, (paste0('PredError', VarName)) := get(VarName) - get(paste0('Pred', VarName))]
             #localOutput[, (paste0('Pred', VarName)) := NULL]
-            #localOutput[, (VarName) := NULL]
+            localOutput[, (VarName) := NULL]
             localOutput[, (paste0('DesignW', VarName)) := NULL]
             #setcolorder(localOutput, c(IDQual, 'DesignWQuantile', 'UnitScoreQuantile', VarName, paste0('Pred', VarName), paste0('PredError', VarName), paste0('PredErrorSTD', VarName), paste0('MomentQuant', VarName)))
             # setnames(localOutput, 'DesignWQuantile', 'Parametro_07._5.1.1.5.')
@@ -100,14 +101,14 @@ setMethod(
             setnames(localOutput, 'UnitScoreQuantile', UnitToIDDDNames('CuantGlob', DD))
             #setnames(localOutput, paste0('PredError', VarName), paste0('Parametro_07._5.1.1.7._', VarName))
             # setnames(localOutput, paste0('ObsErrorSTD', VarName), paste0('Parametro_07._5.1.1.8._', VarName))
-            setnames(localOutput, paste0('ObsErrorSTD', VarName), paste(UnitToIDDDNames('STDErrorObs', DD), VarName, sep = '_'))
+            setnames(localOutput, paste0('ObsErrorSTD', VarName), paste(UnitToIDDDNames('STDErrorObs', DD), IDDDToUnitNames(VarName, DD), sep = '_'))
             #setnames(localOutput, paste0('PredErrorSTD', VarName), paste0('Parametro_07._5.1.1.8._', VarName))
             # setnames(localOutput, paste0('PredErrorSTD', VarName), paste0('Parametro_07._5.1.1.7._', VarName))
-            setnames(localOutput, paste0('PredErrorSTD', VarName), paste(UnitToIDDDNames('STDErrorPred', DD), VarName, sep = '_'))
+            setnames(localOutput, paste0('PredErrorSTD', VarName), paste(UnitToIDDDNames('STDErrorPred', DD), IDDDToUnitNames(VarName, DD), sep = '_'))
             # setnames(localOutput, paste0('MomentQuant', VarName), paste0('Parametro_07._5.1.1.9._', VarName))
-            setnames(localOutput, paste0('MomentQuant', VarName), paste(UnitToIDDDNames('CuantMom', DD), VarName, sep = '_'))
+            setnames(localOutput, paste0('MomentQuant', VarName), paste(UnitToIDDDNames('CuantMom', DD), IDDDToUnitNames(VarName, DD), sep = '_'))
             # setnames(localOutput, paste0('Pred', VarName), paste0('Parametro_07._5.1.1.10._', VarName))
-            setnames(localOutput, paste0('Pred', VarName), paste(UnitToIDDDNames('PredValue', DD), VarName, sep = '_'))
+            setnames(localOutput, paste0('Pred', VarName), paste(UnitToIDDDNames('PredValue', DD), IDDDToUnitNames(VarName, DD), sep = '_'))
             
             output[[VarName]] <- localOutput
 
