@@ -1,7 +1,7 @@
 Package: SelEditUnitPriorit
 Type: Package
 Title: Classes and methods to implement unit prioritization
-Version: 0.0.1
+Version: 0.0.9
 Authors@R: c(
     person("David", "Salgado", email = "david.salgado.fernandez@gmail.com", role = c("cre", "aut")),
     person("Elisa", "Esteban", email = "elisa.esteban.segurado@gmail.com", role = "aut"),
@@ -23,10 +23,10 @@ Imports:
 License: file LICENSE
 Encoding: UTF-8
 LazyData: true
-Collate:
+Collate: 
     'UnitPrioritization-class.R'
+    'ComputePriorityInfo.R'
     'UnitPrioritizationParam-class.R'
     'PrioritizeUnits.R'
-    'getPriorityInfo.R'
     'setPriorityInfo.R'
 RoxygenNote: 6.0.1
