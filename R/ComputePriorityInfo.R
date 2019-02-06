@@ -103,15 +103,6 @@ setMethod(
             #localOutput[, (paste0('Pred', VarName)) := NULL]
             localOutput[, (VarName) := NULL]
             localOutput[, (paste0('DesignW', VarName)) := NULL]
-<<<<<<< HEAD:R/getPriorityInfo.R
-            localOutput$IDEdit <- localVarName
-            setcolorder(localOutput, c(IDQual, 'DesignWQuantile', 'UnitScoreQuantile', 'IDEdit', paste0('PredError', VarName), paste0('PredErrorSTD', VarName), paste0('MomentQuant', VarName)))
-            setnames(localOutput, 'DesignWQuantile', 'Parametro_07._5.1.1.5')
-            setnames(localOutput, 'UnitScoreQuantile', 'Parametro_07._5.1.1.6._')
-            setnames(localOutput, paste0('PredError', VarName), paste0('Parametro_07._5.1.1.7.', localVarName))
-            setnames(localOutput, paste0('PredErrorSTD', VarName), paste0('Parametro_07._5.1.1.8.', localVarName))
-            setnames(localOutput, paste0('MomentQuant', VarName), paste0('Parametro_07._5.1.1.9.', localVarName))
-=======
             #setcolorder(localOutput, c(IDQual, 'DesignWQuantile', 'UnitScoreQuantile', VarName, paste0('Pred', VarName), paste0('PredError', VarName), paste0('PredErrorSTD', VarName), paste0('MomentQuant', VarName)))
             # setnames(localOutput, 'DesignWQuantile', 'Parametro_07._5.1.1.5.')
             setnames(localOutput, 'DesignWQuantile', UnitToIDDDNames('CuantPeso', DD))
@@ -128,7 +119,6 @@ setMethod(
             # setnames(localOutput, paste0('Pred', VarName), paste0('Parametro_07._5.1.1.10._', VarName))
             setnames(localOutput, paste0('Pred', VarName), paste(UnitToIDDDNames('PredValue', DD), names(VarName), sep = '_'))
 
->>>>>>> 934056485aabc45fd7fdcaec40dc42fd1025433e:R/ComputePriorityInfo.R
             output[[VarName]] <- localOutput
 
         }
