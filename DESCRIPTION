@@ -1,7 +1,7 @@
 Package: SelEditUnitPriorit
 Type: Package
 Title: Classes and methods to implement unit prioritization
-Version: 0.0.9
+Version: 0.1.0
 Authors@R: c(
     person("David", "Salgado", email = "david.salgado.fernandez@gmail.com", role = c("cre", "aut")),
     person("Elisa", "Esteban", email = "elisa.esteban.segurado@gmail.com", role = "aut"),
@@ -19,7 +19,8 @@ Imports:
     StQImputation (>= 0.0.1),
     StQPrediction (>= 0.0.1),
     SelEditErrorMoment (>= 0.0.1),
-    SelEditFunctions (>= 0.0.1)
+    SelEditFunctions (>= 0.0.1),
+    contObsPredModelParam (>= 0.0.1)
 License: file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -30,4 +31,4 @@ Collate:
     'PrioritizeUnits.R'
     'getPriority.R'
     'setPriorityInfo.R'
-RoxygenNote: 6.0.1
+RoxygenNote: 5.0.1

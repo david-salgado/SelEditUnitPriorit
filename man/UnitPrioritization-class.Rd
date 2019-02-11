@@ -21,7 +21,6 @@ prioritization in the optimization approach to selective editing.
 
 \item{\code{PriorityInfo}}{list with complementary information about the prioritization of units.}
 }}
-
 \examples{
 # An empty UnitPrioritization object:
 new(Class = 'UnitPrioritization')
@@ -32,3 +31,4 @@ UnitPriorParam <- new(Class = 'UnitPrioritization')
 }
 
 }
+

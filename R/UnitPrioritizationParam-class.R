@@ -8,6 +8,8 @@
 #'
 #' @slot ScFunctionParam Named list with the parameters for the unit score function.
 #'
+#' @slot DesignW Named list with the design weights of each variable with item score.
+#'
 #' @examples
 #' # An empty UnitPrioritizationParam object:
 #' new(Class = 'UnitPrioritizationParam')
@@ -22,9 +24,11 @@
 #' @export
 setClass(Class = "UnitPrioritizationParam",
          slots = c(UnitScFunction = 'character',
-                   ScFunctionParam = 'list'),
+                   ScFunctionParam = 'list',
+                   DesignW = 'list'),
          prototype = list(UnitScFunction = 'SelEditFunctions::MinkUnitSc',
-                          ScFunctionParam = list(alpha = 1, Weights = 1)),
+                          ScFunctionParam = list(alpha = 1, Weights = 1),
+                          DesignW = list()),
          validity = function(object){
 
 

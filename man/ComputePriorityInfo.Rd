@@ -32,5 +32,15 @@ the error moments per domain, the quantile of sampling weights per domain and th
 unit score per quantile.
 }
 \examples{
+\dontrun{
+
+UnitPriorParam <- new(Class = 'UnitPrioritizationParam',
+                      UnitScFunction = 'MinkUnitSc',
+                      ScFunctionParam =  list(alpha = 1, Weights = 1))
+
+PrioritizeUnits(ErrorMoment, UnitPriorParam)
 
 }
+
+}
+
