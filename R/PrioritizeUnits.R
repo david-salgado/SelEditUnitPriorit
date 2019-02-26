@@ -71,9 +71,8 @@ setMethod(f = "PrioritizeUnits",
                     }
                     dt.aux[, scores := -scores]
                     setkeyv(dt.aux, c('scores', paste0('DesignW', VarNames)))
-                    dt.aux[, priority := rev(seq(along = score))]
+                    dt.aux[, priority := seq(along = score)]
                     setkey(dt.aux, 'init.order')
-
                     out <- dt.aux[['priority']]
                     return(out)
 
