@@ -31,7 +31,7 @@ setClass(Class = "UnitPrioritizationParam",
                           DesignW = list()),
          validity = function(object){
 
-
+           if (length(UnitScFunction) != 1) stop('[SelEditUnitPriorit validation] UnitScFunction must have length 1.')
 
              return(TRUE)
          }

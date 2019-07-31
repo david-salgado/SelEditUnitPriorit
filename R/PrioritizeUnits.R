@@ -1,6 +1,6 @@
 #' \code{PrioritizeUnits} computes the prioritization of units
 #'
-#' @param object Object of class \linkS4class{SelEditErrorMoment}.
+#' @param object Object of class \linkS4class{ErrorMoments}.
 #'
 #' @param Param Object of class \linkS4class{UnitPrioritizationParam}.
 #'

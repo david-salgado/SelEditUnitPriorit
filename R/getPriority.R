@@ -3,9 +3,9 @@
 #' @description \code{getPriority} extracts the slots \code{UnitPriority} and \code{Units} to
 #' return a \linkS4class{data.table} with each unit and its editing priority.
 #'
-#' @param object Object of class \linkS4class{categObsPredModelParam}.
+#' @param object Object of class \linkS4class{UnitPrioritization}.
 #'
-#' @return Character vector with the names of the regressors.
+#' @return Numeric vector with the values of priority.
 #'
 #' @examples
 #' \dontrun{

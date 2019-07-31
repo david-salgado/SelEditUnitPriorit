@@ -11,7 +11,7 @@ PrioritizeUnits(object, Param)
 \S4method{PrioritizeUnits}{ErrorMoments,UnitPrioritizationParam}(object, Param)
 }
 \arguments{
-\item{object}{Object of class \linkS4class{SelEditErrorMoment}.}
+\item{object}{Object of class \linkS4class{ErrorMoments}.}
 
 \item{Param}{Object of class \linkS4class{UnitPrioritizationParam}.}
 }
@@ -32,4 +32,3 @@ PrioritizeUnits(ErrorMoment, UnitPriorParam)
 
 }
 }
-

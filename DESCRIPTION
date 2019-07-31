@@ -1,7 +1,7 @@
 Package: SelEditUnitPriorit
 Type: Package
 Title: Classes and methods to implement unit prioritization
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: c(
     person("David", "Salgado", email = "david.salgado.fernandez@gmail.com", role = c("cre", "aut")),
     person("Elisa", "Esteban", email = "elisa.esteban.segurado@gmail.com", role = "aut"),
@@ -31,4 +31,4 @@ Collate:
     'PrioritizeUnits.R'
     'getPriority.R'
     'setPriorityInfo.R'
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1

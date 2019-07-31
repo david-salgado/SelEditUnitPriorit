@@ -11,16 +11,24 @@ prioritization in the optimization approach to selective editing.
 \section{Slots}{
 
 \describe{
-\item{\code{Domains}}{\linkS4class{data.table} with the values of the variables indicating the domains.}
+\item{\code{Domains}}{\linkS4class{data.table} with a row per domain with the values of the variables
+determining the domains of the data set.}
 
-\item{\code{Units}}{list with the units of each domain.}
+\item{\code{Units}}{List of data.tables with as many components as domains (in the same order of the rows
+of slot \code{Domains}) with every unit per domain.}
 
-\item{\code{UnitScores}}{list with the scores of each unit.}
+\item{\code{UnitScores}}{List with as many components as domains (in the same order of the rows
+of slot \code{Domains}) with the scores of each unit (in the same order of the corresponding
+data.table in slot \code{Units}).}
 
-\item{\code{UnitPriority}}{list with the priority.}
+\item{\code{UnitPriority}}{List with as many components as domains (in the same order of the rows
+of slot \code{Domains}) with the priority of each unit (in the same order of the corresponding
+data.table in slot \code{Units}).}
 
-\item{\code{PriorityInfo}}{list with complementary information about the prioritization of units.}
+\item{\code{PriorityInfo}}{Object of class \linkS4class{StQ} with complementary information about the
+prioritization of units.}
 }}
+
 \examples{
 # An empty UnitPrioritization object:
 new(Class = 'UnitPrioritization')
@@ -31,4 +39,3 @@ UnitPriorParam <- new(Class = 'UnitPrioritization')
 }
 
 }
-

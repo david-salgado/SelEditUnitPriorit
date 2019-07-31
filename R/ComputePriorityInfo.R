@@ -1,10 +1,10 @@
 #' @title Return the complementary info abouth the prioritization of units.
 #'
-#' @description \code{ComputePriorityInfo} returns a \linkS4class{data.table} with complementary
-#' information about the prioritization of units in the optimization approach to selective editing.
-#' It basically returns the error estimates, the prediction error standard deviates, the quantile of
-#' the error moments per domain, the quantile of sampling weights per domain and the quantile of the
-#' unit score per quantile.
+#' @description \code{ComputePriorityInfo} returns an object of class \linkS4class{StQ} with
+#' complementary information about the prioritization of units in the optimization approach to
+#' selective editing. It basically returns the error estimates, the prediction error standard
+#' deviates, the quantile of the error moments per domain, the quantile of sampling weights per
+#' domain and the quantile of the unit score per domain.
 #'
 #' @param object Object of class \linkS4class{UnitPrioritization}.
 #'
@@ -14,18 +14,7 @@
 #'
 #' @param DD Object of class DD.
 #'
-#' @return Returns a \linkS4class{data.table} with the complementary info.
-#'
-#' @examples
-#' \dontrun{
-#'
-#' UnitPriorParam <- new(Class = 'UnitPrioritizationParam',
-#'                       UnitScFunction = 'MinkUnitSc',
-#'                       ScFunctionParam =  list(alpha = 1, Weights = 1))
-#'
-#' PrioritizeUnits(ErrorMoment, UnitPriorParam)
-#'
-#' }
+#' @return Returns an object of class \linkS4class{StQ} with the complementary info.
 #'
 #' @import data.table contObsPredModelParam SelEditErrorMoment
 #'
@@ -89,34 +78,20 @@ setMethod(
             localOutput <- merge(localOutput, DesignWQuants, by = IDQual, all.x = TRUE)
             localOutput[, (DomainNames) := NULL]
             setnames(localOutput, 'MomentQuantile', paste0('MomentQuant', VarName))
-            #localOutput[, (paste0('DesignW', VarName)) := NULL]
 
-            # localVarName <- ExtractNames(VarName)
-            #ObsPredVarNames <- paste0(c('Pred', 'PredErrorSTD', 'DesignW'), VarName)
             ObsPredVarNames <- paste0(c('Pred', 'ObsErrorSTD', 'PredErrorSTD', 'DesignW'), VarName)
             localVarNames <- c(VarName, ObsPredVarNames)
             ObsPredData.StQ <- ObsPredModelParam@Data#[IDDD == localVarName]
             ObsPredData.dt <- ObsPredData.dt[, c(IDQual, localVarNames), with = F]
             localOutput[, (paste0('DesignW', VarName)) := NULL]
             localOutput <- merge(localOutput, ObsPredData.dt, all.x = TRUE, by = IDQual)
-            #localOutput[, (paste0('PredError', VarName)) := get(VarName) - get(paste0('Pred', VarName))]
-            #localOutput[, (paste0('Pred', VarName)) := NULL]
             localOutput[, (VarName) := NULL]
             localOutput[, (paste0('DesignW', VarName)) := NULL]
-            #setcolorder(localOutput, c(IDQual, 'DesignWQuantile', 'UnitScoreQuantile', VarName, paste0('Pred', VarName), paste0('PredError', VarName), paste0('PredErrorSTD', VarName), paste0('MomentQuant', VarName)))
-            # setnames(localOutput, 'DesignWQuantile', 'Parametro_07._5.1.1.5.')
             setnames(localOutput, 'DesignWQuantile', UnitToIDDDNames('CuantPeso', DD))
-            # setnames(localOutput, 'UnitScoreQuantile', 'Parametro_07._5.1.1.6.')
             setnames(localOutput, 'UnitScoreQuantile', UnitToIDDDNames('CuantGlob', DD))
-            #setnames(localOutput, paste0('PredError', VarName), paste0('Parametro_07._5.1.1.7._', VarName))
-            # setnames(localOutput, paste0('ObsErrorSTD', VarName), paste0('Parametro_07._5.1.1.8._', VarName))
             setnames(localOutput, paste0('ObsErrorSTD', VarName), paste(UnitToIDDDNames('STDErrorObs', DD), names(VarName), sep = '_'))
-            #setnames(localOutput, paste0('PredErrorSTD', VarName), paste0('Parametro_07._5.1.1.8._', VarName))
-            # setnames(localOutput, paste0('PredErrorSTD', VarName), paste0('Parametro_07._5.1.1.7._', VarName))
             setnames(localOutput, paste0('PredErrorSTD', VarName), paste(UnitToIDDDNames('STDErrorPred', DD), names(VarName), sep = '_'))
-            # setnames(localOutput, paste0('MomentQuant', VarName), paste0('Parametro_07._5.1.1.9._', VarName))
             setnames(localOutput, paste0('MomentQuant', VarName), paste(UnitToIDDDNames('CuantMom', DD), names(VarName), sep = '_'))
-            # setnames(localOutput, paste0('Pred', VarName), paste0('Parametro_07._5.1.1.10._', VarName))
             setnames(localOutput, paste0('Pred', VarName), paste(UnitToIDDDNames('PredValue', DD), names(VarName), sep = '_'))
 
             output[[VarName]] <- localOutput

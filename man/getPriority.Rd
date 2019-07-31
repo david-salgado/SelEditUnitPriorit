@@ -11,10 +11,10 @@ getPriority(object)
 \S4method{getPriority}{UnitPrioritization}(object)
 }
 \arguments{
-\item{object}{Object of class \linkS4class{categObsPredModelParam}.}
+\item{object}{Object of class \linkS4class{UnitPrioritization}.}
 }
 \value{
-Character vector with the names of the regressors.
+Numeric vector with the values of priority.
 }
 \description{
 \code{getPriority} extracts the slots \code{UnitPriority} and \code{Units} to
@@ -31,4 +31,3 @@ getEdData(fitPar)
 
 
 }
-

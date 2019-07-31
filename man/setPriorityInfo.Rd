@@ -13,7 +13,7 @@ setPriorityInfo(object) <- value
 \arguments{
 \item{object}{Object of class \linkS4class{UnitPrioritization}.}
 
-\item{Param}{\linkS4class{data.table} with the info on the prioritization of units.}
+\item{value}{Object of class \linkS4class{StQ} with the info on the prioritization of units.}
 }
 \value{
 Object of class \linkS4class{UnitPrioritization}.
@@ -21,15 +21,3 @@ Object of class \linkS4class{UnitPrioritization}.
 \description{
 This setter sets the slot PriorityInfo in a \linkS4class{UnitPrioritization} object.
 }
-\examples{
-\dontrun{
-
-UnitPriorParam <- new(Class = 'UnitPrioritizationParam',
-                      UnitScFunction = 'MinkUnitSc',
-                      ScFunctionParam =  list(alpha = 1, Weights = 1))
-
-PrioritizeUnits(ErrorMoment, UnitPriorParam)
-
-}
-}
-

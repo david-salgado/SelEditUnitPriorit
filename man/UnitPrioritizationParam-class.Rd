@@ -18,6 +18,7 @@ function.}
 
 \item{\code{DesignW}}{Named list with the design weights of each variable with item score.}
 }}
+
 \examples{
 # An empty UnitPrioritizationParam object:
 new(Class = 'UnitPrioritizationParam')
@@ -30,4 +31,3 @@ UnitPriorParam <- new(Class = 'UnitPrioritizationParam',
 }
 
 }
-
