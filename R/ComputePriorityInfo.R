@@ -89,10 +89,11 @@ setMethod(
             localOutput[, (paste0('DesignW', VarName)) := NULL]
             setnames(localOutput, 'DesignWQuantile', UnitToIDDDNames('CuantPeso', DD))
             setnames(localOutput, 'UnitScoreQuantile', UnitToIDDDNames('CuantGlob', DD))
-            setnames(localOutput, paste0('ObsErrorSTD', VarName), paste(UnitToIDDDNames('STDErrorObs', DD), names(VarName), sep = '_'))
-            setnames(localOutput, paste0('PredErrorSTD', VarName), paste(UnitToIDDDNames('STDErrorPred', DD), names(VarName), sep = '_'))
-            setnames(localOutput, paste0('MomentQuant', VarName), paste(UnitToIDDDNames('CuantMom', DD), names(VarName), sep = '_'))
-            setnames(localOutput, paste0('Pred', VarName), paste(UnitToIDDDNames('PredValue', DD), names(VarName), sep = '_'))
+
+            setnames(localOutput, paste0('ObsErrorSTD', VarName), paste(UnitToIDDDNames('STDErrorObs', DD), IDDDToUnitNames(VarName, DD), sep = '_'))
+            setnames(localOutput, paste0('PredErrorSTD', VarName), paste(UnitToIDDDNames('STDErrorPred', DD), IDDDToUnitNames(VarName, DD), sep = '_'))
+            setnames(localOutput, paste0('MomentQuant', VarName), paste(UnitToIDDDNames('CuantMom', DD), IDDDToUnitNames(VarName, DD), sep = '_'))
+            setnames(localOutput, paste0('Pred', VarName), paste(UnitToIDDDNames('PredValue', DD), IDDDToUnitNames(VarName, DD), sep = '_'))
 
             output[[VarName]] <- localOutput
 
