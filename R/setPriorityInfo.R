@@ -4,22 +4,12 @@
 #'
 #' @param object Object of class \linkS4class{UnitPrioritization}.
 #'
-#' @param Param \linkS4class{data.table} with the info on the prioritization of units.
+#' @param value Object of class \linkS4class{StQ} with the info on the prioritization of units.
 #'
 #' @return Object of class \linkS4class{UnitPrioritization}.
 #'
 #' @rdname setPriorityInfo
 #'
-#' @examples
-#' \dontrun{
-#'
-#' UnitPriorParam <- new(Class = 'UnitPrioritizationParam',
-#'                       UnitScFunction = 'MinkUnitSc',
-#'                       ScFunctionParam =  list(alpha = 1, Weights = 1))
-#'
-#' PrioritizeUnits(ErrorMoment, UnitPriorParam)
-#'
-#' }
 setGeneric("setPriorityInfo<-", function(object, value) {standardGeneric("setPriorityInfo<-")})
 
 #' @rdname setPriorityInfo

@@ -15,6 +15,8 @@ of unit prioritization in the optimization approach to selective editing.
 function.}
 
 \item{\code{ScFunctionParam}}{Named list with the parameters for the unit score function.}
+
+\item{\code{DesignW}}{Named list with the design weights of each variable with item score.}
 }}
 
 \examples{

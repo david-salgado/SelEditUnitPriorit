@@ -22,15 +22,12 @@ ComputePriorityInfo(object, ObsPredModelParam, Moments, DD)
 \item{DD}{Object of class DD.}
 }
 \value{
-Returns a \linkS4class{data.table} with the complementary info.
+Returns an object of class \linkS4class{StQ} with the complementary info.
 }
 \description{
-\code{ComputePriorityInfo} returns a \linkS4class{data.table} with complementary
-information about the prioritization of units in the optimization approach to selective editing.
-It basically returns the error estimates, the prediction error standard deviates, the quantile of
-the error moments per domain, the quantile of sampling weights per domain and the quantile of the
-unit score per quantile.
-}
-\examples{
-
+\code{ComputePriorityInfo} returns an object of class \linkS4class{StQ} with
+complementary information about the prioritization of units in the optimization approach to
+selective editing. It basically returns the error estimates, the prediction error standard
+deviates, the quantile of the error moments per domain, the quantile of sampling weights per
+domain and the quantile of the unit score per domain.
 }

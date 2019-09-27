@@ -1,6 +1,6 @@
 #' \code{PrioritizeUnits} computes the prioritization of units
 #'
-#' @param object Object of class \linkS4class{SelEditErrorMoment}.
+#' @param object Object of class \linkS4class{ErrorMoments}.
 #'
 #' @param Param Object of class \linkS4class{UnitPrioritizationParam}.
 #'
@@ -50,13 +50,33 @@ setMethod(f = "PrioritizeUnits",
               })
 
               UnitPriority <- lapply(UnitScores, function(score){
-                  
+
                   dt.aux <- data.table(init.order = seq(along = score), scores = score)
-                  setkeyv(dt.aux, 'scores')
-                  dt.aux[, priority := rev(seq(along = score))]
-                  setkey(dt.aux, 'init.order')
-                  out <- dt.aux[['priority']]
-                  return(out)
+
+                  if (length(Param@DesignW) == 0){
+
+                    setkeyv(dt.aux, 'scores')
+                    dt.aux[, priority := rev(seq(along = score))]
+                    setkey(dt.aux, 'init.order')
+
+                    out <- dt.aux[['priority']]
+                    return(out)
+
+                  } else {
+
+                    for (indexVar in seq(along = object@Moments)){
+
+                        dt.aux[, paste0('DesignW', VarNames[indexVar]) := -Param@DesignW[[ VarNames[indexVar] ]]]
+
+                    }
+                    dt.aux[, scores := -scores]
+                    setkeyv(dt.aux, c('scores', paste0('DesignW', VarNames)))
+                    dt.aux[, priority := seq(along = score)]
+                    setkey(dt.aux, 'init.order')
+                    out <- dt.aux[['priority']]
+                    return(out)
+
+                  }
 
               })
 
