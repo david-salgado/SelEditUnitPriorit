@@ -37,7 +37,7 @@ setMethod(f = "PrioritizeUnits",
                   array <- object@Moments[[cellIndex]]
                   moments <- array$v
                   cellDim <- array$dim[[1]]
-                  tempList <- split(moments, rep(1:nCol, cellDim))
+                  tempList <- split(moments, each = rep(1:nCol, cellDim))
                   names(tempList) <- VarNames
                   tempDT <- as.data.table(tempList)[
                       , globalSc := do.call(Param@UnitScFunction, c(list(x = as.matrix(.SD)), Param@ScFunctionParam)), .SDcols = VarNames]
